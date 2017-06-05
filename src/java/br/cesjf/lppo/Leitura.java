@@ -9,7 +9,7 @@ public class Leitura {
     
     private Long id;
     private Long coleta;
-    private String localleitura;
+    private String localLeitura;
     private int leitura;
     private String unidade;
     private Date atualizacao;
@@ -17,10 +17,10 @@ public class Leitura {
     public Leitura() {
     }
 
-    public Leitura(Long id, Long coleta, String localleitura, int leitura, String unidade, Date atualizacao) {
+    public Leitura(Long id, Long coleta, String localLeitura, int leitura, String unidade, Date atualizacao) {
         this.id = id;
         this.coleta = coleta;
-        this.localleitura = localleitura;
+        this.localLeitura = localLeitura;
         this.leitura = leitura;
         this.unidade = unidade;
         this.atualizacao = atualizacao;
@@ -42,12 +42,12 @@ public class Leitura {
         this.coleta = coleta;
     }
 
-    public String getLocalleitura() {
-        return localleitura;
+    public String getLocalLeitura() {
+        return localLeitura;
     }
 
-    public void setLocalleitura(String localleitura) {
-        this.localleitura = localleitura;
+    public void setLocalLeitura(String localLeitura) {
+        this.localLeitura = localLeitura;
     }
 
     public int getLeitura() {

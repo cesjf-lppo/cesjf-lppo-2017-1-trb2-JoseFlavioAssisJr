@@ -10,18 +10,16 @@ public class Coleta {
     
     private Long id;
     private String descricao;
-    private Date datacoleta;
+    private Date dataColeta;
 
     public Coleta() {
     }
 
-    public Coleta(Long id, String descricao, Date datacoleta) {
+    public Coleta(Long id, String descricao, Date dataColeta) {
         this.id = id;
         this.descricao = descricao;
-        this.datacoleta = datacoleta;
+        this.dataColeta = dataColeta;
     }
-
-    
     
     public Long getId() {
         return id;
@@ -39,12 +37,12 @@ public class Coleta {
         this.descricao = descricao;
     }
 
-    public Date getDatacoleta() {
-        return datacoleta;
+    public Date getDataColeta() {
+        return dataColeta;
     }
 
-    public void setDatacoleta(Date datacoleta) {
-        this.datacoleta = datacoleta;
+    public void setDataColeta(Date dataColeta) {
+        this.dataColeta = dataColeta;
     }
     
     
