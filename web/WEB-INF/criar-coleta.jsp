@@ -13,7 +13,7 @@
     </head>
     <body>
     <center>
-        <form action="CriaPedidoServlet" method="get">
+        <form action="AdicionaColetaServlet" method="get">
             <h1>Criar Coleta</h1>
             <br>
             <b>Descrição: <input type="text" name="descricao" value="" size="30" /><br>
