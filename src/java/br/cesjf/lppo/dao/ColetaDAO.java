@@ -18,7 +18,6 @@ public class ColetaDAO {
     private final PreparedStatement opNovaColeta;
     private final PreparedStatement opNovoPontoDeLeitura;
     private final PreparedStatement opListarColetas;
-    private final PreparedStatement opAtualizaLeitura;
     private final PreparedStatement opListaLeituraPorColeta;
     private final PreparedStatement opListaLeituraPorLocal;
     
@@ -27,7 +26,6 @@ public class ColetaDAO {
         opNovaColeta = conexao.prepareStatement("INSERT INTO coleta(descricao) VALUES (?)");
         opNovoPontoDeLeitura = conexao.prepareCall("INSERT INTO leitura(coleta,unidade,localLeitura) values (?,?,?)");
         opListarColetas = conexao.prepareStatement("SELECT * FROM coleta");
-        opAtualizaLeitura = conexao.prepareStatement("UPDATE leitura SET leitura = ?, atualizacao = CURRENT_TIMESTAMP WHERE id = ?");
         opListaLeituraPorColeta = conexao.prepareStatement("SELECT C.DESCRICAO, L.* FROM COLETA C INNER JOIN LEITURA L ON C.ID = L.COLETA WHERE C.ID = ?");
         opListaLeituraPorLocal = conexao.prepareStatement("SELECT C.DESCRICAO, L.* FROM COLETA C INNER JOIN LEITURA L ON C.ID = L.COLETA WHERE L.local = ?");
     }
@@ -67,16 +65,6 @@ public class ColetaDAO {
             return coletas;
         } catch (SQLException ex) {            
             throw new Exception("Erro ao listar coletas", ex);
-        }
-    }
-    
-    public void atualizaLeitura(Leitura leitura) throws Exception {
-        try {
-            opAtualizaLeitura.setInt(1, leitura.getLeitura());
-            opAtualizaLeitura.setLong(2, leitura.getId());
-            opAtualizaLeitura.executeUpdate();
-        }catch (SQLException ex){
-            throw new Exception("Erro ao gravar a coleta", ex);
         }
     }
     
