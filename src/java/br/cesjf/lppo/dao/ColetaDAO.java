@@ -26,8 +26,8 @@ public class ColetaDAO {
         opNovaColeta = conexao.prepareStatement("INSERT INTO coleta(descricao) VALUES (?)");
         opNovoPontoDeLeitura = conexao.prepareCall("INSERT INTO leitura(coleta,unidade,localLeitura) values (?,?,?)");
         opListarColetas = conexao.prepareStatement("SELECT * FROM coleta");
-        opListaLeituraPorColeta = conexao.prepareStatement("SELECT C.DESCRICAO, L.* FROM COLETA C INNER JOIN LEITURA L ON C.ID = L.COLETA WHERE C.ID = ?");
-        opListaLeituraPorLocal = conexao.prepareStatement("SELECT C.DESCRICAO, L.* FROM COLETA C INNER JOIN LEITURA L ON C.ID = L.COLETA WHERE L.local = ?");
+        opListaLeituraPorColeta = conexao.prepareStatement("SELECT * FROM leitura WHERE ID = ?");
+        opListaLeituraPorLocal = conexao.prepareStatement("SELECT * FROM leitura Where localLeitura = ?");
     }
     
     public void cria(Coleta novaColeta) throws Exception {
