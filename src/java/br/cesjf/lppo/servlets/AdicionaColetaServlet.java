@@ -35,11 +35,11 @@ public class AdicionaColetaServlet extends HttpServlet {
         } catch(Exception ex){
             System.err.println(ex);
             request.setAttribute("mensagem", ex);
-            request.getRequestDispatcher("WEB-INF/criar-coleta.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/criar-leitura.jsp").forward(request, response);
             return;
         }
         
-        response.sendRedirect("listar-coletas.html");
+        response.sendRedirect("criar-leitura.html");
         
     }
 }

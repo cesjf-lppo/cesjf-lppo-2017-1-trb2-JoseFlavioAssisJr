@@ -1,6 +1,6 @@
 package br.cesjf.lppo.servlets;
 
-import br.cesjf.lppo.Coleta;
+import br.cesjf.lppo.Leitura;
 import br.cesjf.lppo.dao.ColetaDAO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,31 +17,30 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author José Flávio
  */
-@WebServlet(name = "ListaColetaServlet", urlPatterns = {"/listar-coletas.html"})
-public class ListaColetaServlet extends HttpServlet {
-
-    @Override
+@WebServlet(name = "ListaLeituraPorColetaServlet", urlPatterns = {"/listar-leituras-por-coleta.html"})
+public class ListaLeituraPorColetaServlet extends HttpServlet {
+     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Coleta> coletas;
-         
+        Long coleta = Long.parseLong(request.getParameter("coleta"));
+        List<Leitura> leituras;
+        
         try {
             ColetaDAO dao = new ColetaDAO();
-            coletas = dao.listAll();
+            leituras = dao.listaLeituraPorColeta(coleta);
         } catch (Exception ex) {
-            Logger.getLogger(ListaColetaServlet.class.getName()).log(Level.SEVERE, null, ex);
-            coletas = new ArrayList<>();
-            request.setAttribute("mensagem", ex.getLocalizedMessage());
+            leituras = new ArrayList<>();
+            Logger.getLogger(ListaLeituraPorColetaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        request.setAttribute("coletas" , coletas);
-        request.getRequestDispatcher("WEB-INF/listar-coletas.jsp").forward(request, response);
+        request.setAttribute("leituras",leituras);
+        request.getRequestDispatcher("/WEB-INF/listar-leituras.jsp").forward(request, response);
+        
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         
     }
 }

@@ -1,8 +1,9 @@
 package br.cesjf.lppo.servlets;
 
-import br.cesjf.lppo.Coleta;
+import br.cesjf.lppo.Leitura;
 import br.cesjf.lppo.dao.ColetaDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,31 +18,31 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author José Flávio
  */
-@WebServlet(name = "ListaColetaServlet", urlPatterns = {"/listar-coletas.html"})
-public class ListaColetaServlet extends HttpServlet {
+@WebServlet(name = "ListaLeituraPorLocalServlet", urlPatterns = {"/listar-leitura-por-local.html"})
+public class ListaLeituraPorLocalServlet extends HttpServlet {
 
-    @Override
+     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Coleta> coletas;
-         
+        String local = request.getParameter("local");
+        List<Leitura> leituras;
+        
         try {
             ColetaDAO dao = new ColetaDAO();
-            coletas = dao.listAll();
+            System.out.println(local);
+            leituras = dao.listaLeituraPorLocal(local);
         } catch (Exception ex) {
-            Logger.getLogger(ListaColetaServlet.class.getName()).log(Level.SEVERE, null, ex);
-            coletas = new ArrayList<>();
-            request.setAttribute("mensagem", ex.getLocalizedMessage());
+            leituras = new ArrayList<>();
+            Logger.getLogger(ListaLeituraPorLocalServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        request.setAttribute("coletas" , coletas);
-        request.getRequestDispatcher("WEB-INF/listar-coletas.jsp").forward(request, response);
+        request.setAttribute("leituras",leituras);
+        request.getRequestDispatcher("/WEB-INF/listar-leituras.jsp").forward(request, response);
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         
     }
 }
