@@ -17,12 +17,13 @@
         <h1>Listar Coletas</h1>
         <table border="1">
             <tr>
+                <th>ID:</th>
                 <th>Descrição:</th>
                 <th>Data:</th>
             </tr>
             <c:forEach var="coleta" items="${coletas}">
                 <tr>
-                    <td>ID: ${coleta.id}</td>
+                    <td>${coleta.id}</td>
                     <td>${coleta.descricao}</td>
                     <td>${coleta.dataColeta}</td>
                 </tr>

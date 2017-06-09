@@ -24,10 +24,10 @@ public class ColetaDAO {
     public ColetaDAO ()throws Exception{
         Connection conexao = ConnectionFactory.createConnection();
         opNovaColeta = conexao.prepareStatement("INSERT INTO coleta(descricao) VALUES (?)");
-        opNovoPontoDeLeitura = conexao.prepareCall("INSERT INTO leitura(coleta,unidade,localLeitura) values (?,?,?)");
+        opNovoPontoDeLeitura = conexao.prepareCall("INSERT INTO leitura(coleta,localLeitura,leitura,unidade) values (?,?,?,?)");
         opListarColetas = conexao.prepareStatement("SELECT * FROM coleta");
-        opListaLeituraPorColeta = conexao.prepareStatement("SELECT * FROM leitura WHERE ID = ?");
-        opListaLeituraPorLocal = conexao.prepareStatement("SELECT * FROM leitura Where localLeitura = ?");
+        opListaLeituraPorColeta = conexao.prepareStatement("SELECT coleta.descricao, leitura.coleta, leitura.localLeitura, leitura.leitura, leitura.unidade, leitura.atualizacao FROM coleta, leitura WHERE coleta.id = leitura.id");
+        opListaLeituraPorLocal = conexao.prepareStatement("SELECT * FROM leitura WHERE localLeitura = ?");
     }
     
     public void cria(Coleta novaColeta) throws Exception {
@@ -42,9 +42,8 @@ public class ColetaDAO {
     
     public void criaPontoDeLeitura(Leitura leitura) throws Exception {
         try {
-            opNovoPontoDeLeitura.setLong(1, leitura.getColeta());
+            opNovoPontoDeLeitura.setString(1, leitura.getLocalLeitura());
             opNovoPontoDeLeitura.setString(2, leitura.getUnidade());
-            opNovoPontoDeLeitura.setString(3, leitura.getLocalLeitura());
             opNovoPontoDeLeitura.executeUpdate();
         }catch (SQLException ex){
             throw new Exception("Erro ao criar ponto de leitura!", ex);
@@ -68,10 +67,10 @@ public class ColetaDAO {
         }
     }
     
-    public List<Leitura> listaLeituraPorLocal(String local) throws Exception{
+    public List<Leitura> listaLeituraPorLocal(String localLeitura) throws Exception{
         try {
             List<Leitura> leituras = new ArrayList<>();
-            opListaLeituraPorLocal.setString(1, local);
+            opListaLeituraPorLocal.setString(1, localLeitura);
             ResultSet resultado = opListaLeituraPorLocal.executeQuery();
             while(resultado.next()) {
                 Leitura leitura = new Leitura();

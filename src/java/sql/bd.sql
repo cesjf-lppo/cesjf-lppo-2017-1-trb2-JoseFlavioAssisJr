@@ -21,4 +21,3 @@ CREATE TABLE leitura
 
     CONSTRAINT FK_Coleta FOREIGN KEY (coleta) REFERENCES Coleta(id)
 );
-
