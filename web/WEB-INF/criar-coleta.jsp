@@ -13,14 +13,14 @@
     </head>
     <body>
     <center>
-        <form action="AdicionaColetaServlet" method="get">
+        <form method="post">
             <h1>Criar Coleta</h1>
             <br>
             <b>Descrição: <input type="text" name="descricao" value="" size="30" /><br>
                 <br></b>
             <br>
-            <input type="submit" value="Criar" name="cadastrar" />
-            <input type="reset" value="Cancelar" name="cancelar" />
+            <input type="submit" value="Criar" name="cadastrarC" />
+            <input type="reset" value="Cancelar" name="cancelarC" />
     </center>
 </form>
 </body>

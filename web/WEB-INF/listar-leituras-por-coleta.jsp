@@ -1,19 +1,20 @@
 <%-- 
-    Document   : listar-leituras-por-local
-    Created on : 05/06/2017, 15:12:09
-    Author     : Júnior
+    Document   : listar-leituras
+    Created on : 05/06/2017, 15:01:17
+    Author     : José Flávio
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista de leituras por local:</title>
+        <title>Lista de leituras por coleta:</title>
     </head>
     <body>
         <center>
-        <h1>Lista de leituras por local:</h1>
+        <h1>Lista de leituras por coleta:</h1>
         <table border="1">
             <tr>
                 <th>Coleta:</th>
@@ -24,8 +25,8 @@
             </tr>
             <c:forEach var="leitura" items="${leituras}">
                 <tr>
-                    <td><a href="listar-leituras-por-coleta.html?coleta=">${leitura.coleta}</a></td>
-                    <td>${leitura.localLeitura}</td>
+                    <td>${leitura.coleta}</td>
+                    <td><a href="lista-por-local.html?local=${leitura.localLeitura}">${leitura.localLeitura}</a></td>
                     <td>${leitura.leitura}</td>
                     <td>${leitura.unidade}</td>
                     <td>${leitura.atualizacao}</td>
@@ -35,5 +36,4 @@
         <a href="listar-coletas.html">Todas as coletas</a>
         </center>
     </body>
-</body>
 </html>
