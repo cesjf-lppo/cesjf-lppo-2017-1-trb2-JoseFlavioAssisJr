@@ -24,7 +24,7 @@ public class ColetaDAO {
     public ColetaDAO ()throws Exception{
         Connection conexao = ConnectionFactory.createConnection();
         opNovaColeta = conexao.prepareStatement("INSERT INTO coleta(descricao) VALUES (?)");
-        opNovoPontoDeLeitura = conexao.prepareCall("INSERT INTO leitura(coleta,localLeitura,leitura,unidade) values (?,?,?,?)");
+        opNovoPontoDeLeitura = conexao.prepareCall("INSERT INTO leitura(coleta, localLeitura,unidade) values (?,?,?)");
         opListarColetas = conexao.prepareStatement("SELECT * FROM coleta");
         opListaLeituraPorColeta = conexao.prepareStatement("SELECT coleta.descricao, leitura.coleta, leitura.localLeitura, leitura.leitura, leitura.unidade, leitura.atualizacao FROM coleta, leitura WHERE coleta.id = leitura.id");
         opListaLeituraPorLocal = conexao.prepareStatement("SELECT * FROM leitura WHERE localLeitura = ?");
@@ -40,10 +40,11 @@ public class ColetaDAO {
         }
     }
     
-    public void criaPontoDeLeitura(Leitura leitura) throws Exception {
+    public void criaPontoDeLeitura(Leitura novaLeitura) throws Exception {
         try {
-            opNovoPontoDeLeitura.setString(1, leitura.getLocalLeitura());
-            opNovoPontoDeLeitura.setString(2, leitura.getUnidade());
+            opNovoPontoDeLeitura.setLong(1, novaLeitura.getColeta());
+            opNovoPontoDeLeitura.setString(2, novaLeitura.getLocalLeitura());
+            opNovoPontoDeLeitura.setString(3, novaLeitura.getUnidade());
             opNovoPontoDeLeitura.executeUpdate();
         }catch (SQLException ex){
             throw new Exception("Erro ao criar ponto de leitura!", ex);
