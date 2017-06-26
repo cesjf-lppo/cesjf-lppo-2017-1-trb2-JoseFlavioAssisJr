@@ -4,7 +4,6 @@
     Author     : José Flávio
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,9 +16,6 @@
         <form method="post">
             <h1>Criar pontos de leitura</h1>
             <br>
-            <c:forEach var="coleta" items="${coletas}">                                
-                ${coleta.id} - ${coleta.descricao}
-            </c:forEach>
             <b>Local: <input type="text" name="localLeitura" value="" size="30" /><br>
             <b>Unidade <input type="text" name="unidade" value="" size="30" /><br>
             </b><br>
